@@ -93,30 +93,24 @@
                         <div class="full">
                             <div id="input-source" class="input-marker">
                                 <div class="left">
-                                    <span id="gui-search-source-label" class="input-label">Start:</span>
+                                    <span id="gui-search-source-label" class="input-label">Adresse de départ:</span>
                                 </div>
                                 <div class="center input-box">
-                                    <input id="gui-input-source" class="input-box" type="text" title="Enter start" value="" maxlength="200">
+                                    <input id="gui-input-source" class="input-box" type="text" title="Lieu de départ" value="" maxlength="200">
                                 </div>
                                 <div class="left">
                                     <div id="gui-delete-source" class="iconic-button cancel-marker input-delete"></div>
                                 </div>
-                                <div class="right">
-                                    <a id="gui-search-source" class="button">  Show  </a>
-                                </div>
                             </div>
                             <div id="input-target" class="input-marker">
                                 <div class="left">
-                                    <span id="gui-search-target-label" class="input-label">End:</span>
+                                    <span id="gui-search-target-label" class="input-label">Adresse d'arrivée:</span>
                                 </div>
                                 <div class="center input-box">
-                                    <input id="gui-input-target" class="input-box" type="text" title="Enter destination" value="" maxlength="200">
+                                    <input id="gui-input-target" class="input-box" type="text" title="Lieu d'arrivée" value="" maxlength="200">
                                 </div>
                                 <div class="left">
                                     <div id="gui-delete-target" class="iconic-button cancel-marker input-delete"></div>
-                                </div>
-                                <div class="right">
-                                    <a id="gui-search-target" class="button">  Show  </a>
                                 </div>
                             </div>
                         </div>
