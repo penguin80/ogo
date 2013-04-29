@@ -1,6 +1,6 @@
 <html>
     <head>
-        <title>Ex3c - overlay of WMS over Google layer</title>
+        <title>Lol</title>
 
         <script type="text/javascript" src="js/config.js"></script>    
         <script type="text/javascript">
