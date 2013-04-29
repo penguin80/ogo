@@ -46,7 +46,7 @@ html, body {
 }
 .box-content {
     background-color: #FFFFFF;
-    /*border-radius: 8px 8px 8px 8px;*/
+/*    border-radius: 8px 8px 8px 8px;*/
     margin: 5px;
     padding: 5px;
     position: absolute;
@@ -90,10 +90,13 @@ html, body {
     width: 410px;
 }
 #main-input {
+    font-size: 11px;
     height: 140px;
-    width: 390px;
+    width: 390px; 
+    font-family: Verdana,Arial,Helvetica,sans-serif;
 }
 #main-output {
+    margin-top: 50px;
     bottom: 0;
     top: 160px;
     width: 390px;
@@ -122,6 +125,7 @@ html, body {
     padding-bottom: 4px;
 }
 .input-label {
+    width: 100px;
     margin: 0 2px 0 0;
 }
 .input-delete {
@@ -129,7 +133,7 @@ html, body {
     visibility: hidden;
 }
 .input-box {
-    width: 100%;
+    width: 80%;
 }
 #gui-engine-toggle {
     max-width: 200px;

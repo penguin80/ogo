@@ -1,6 +1,7 @@
 <html>
     <head>
         <title>Lol</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <link type="text/css" href="css/styles.css" rel="stylesheet">
         <link type="text/css" href="css/leaflet.css" rel="stylesheet">
         <script type="text/javascript" src="js/OSRM.js"></script>    
@@ -84,16 +85,12 @@
         </div>
         <div id="gui" style="display: block;">
             <div id="main-wrapper" class="box-wrapper" style="left: 5px; visibility: visible;">
-                <div id="main-input" class="box-content">
-                    <div id="input-mask-header">
-                        <div id="main-toggle" class="iconic-button cancel-marker top-right-button"></div>
-                        <div class="quad top-right-button"></div>
-                    </div>
+                <div id="main-input" class="box-content">   
                     <div id="input-mask">
                         <div class="full">
                             <div id="input-source" class="input-marker">
                                 <div class="left">
-                                    <span id="gui-search-source-label" class="input-label">Adresse de départ:</span>
+                                    <span id="gui-search-source-label" class="input-label">Lieu de départ:</span>
                                 </div>
                                 <div class="center input-box">
                                     <input id="gui-input-source" class="input-box" type="text" title="Lieu de départ" value="" maxlength="200">
@@ -104,7 +101,7 @@
                             </div>
                             <div id="input-target" class="input-marker">
                                 <div class="left">
-                                    <span id="gui-search-target-label" class="input-label">Adresse d'arrivée:</span>
+                                    <span id="gui-search-target-label" class="input-label">Lieu d'arrivée:</span>
                                 </div>
                                 <div class="center input-box">
                                     <input id="gui-input-target" class="input-box" type="text" title="Lieu d'arrivée" value="" maxlength="200">
@@ -120,12 +117,6 @@
                                 <div class="left">
                                     <a id="gui-reset" class="button">  Reset  </a>
                                 </div>
-                                <div class="center">
-                                    <span id="styled-select-gui-engine-toggle" class="styled-select base-font" style="width: 103px; height: 18px;">Car (fastest)</span>
-                                    <select id="gui-engine-toggle" class="engine-select styled-select-helper base-font">
-                                        <option value="0">Car (fastest)</option>
-                                    </select>
-                                </div>
                                 <div class="right">
                                     <a id="gui-reverse" class="button">Reverse</a>
                                 </div>
@@ -136,14 +127,7 @@
                 <div id="main-output" class="box-content">
                     <div id="information-box-header"></div>
                     <div id="information-box" class="information-box-with-normal-header"></div>
-                    <div id="legal-notice" class="small-font">
-                        Routing by
-                        <a href="http://project-osrm.org/">Project OSRM</a>
-                        - Geocoder by
-                        <a href="http://wiki.openstreetmap.org/wiki/Nominatim">Nominatim</a>
-                        - OSRM hosting by
-                        <a href="http://algo2.iti.kit.edu/">KIT</a>
-                    </div>
+                    
                 </div>
             </div>
         </div>
