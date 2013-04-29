@@ -2,8 +2,7 @@
     <head>
         <title>Lol</title>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <link type="text/css" href="css/styles.css" rel="stylesheet">
-        <link type="text/css" href="css/leaflet.css" rel="stylesheet">
+        <link type="text/css" href="css/style.css" rel="stylesheet">
         <script type="text/javascript" src="js/OSRM.js"></script>    
         <script type="text/javascript" src="js/leaflet.js"></script>    
         <script type="text/javascript" src="js/config.js"></script> 
@@ -101,18 +100,18 @@
                 })
                          
                 var wms = new OpenLayers.Layer.WMS(
-                                "GeoAdmin WMS IFDG",
-                                "http://wms.geo.admin.ch",
-                                {
-                                    layers: 'ch.swisstopo.pixelkarte-pk25.metadata-kartenblatt',
-                                    SLD: 'http://poulpe.heig-vd.ch/ogo13' + '/blattnummer.sld.xml',
-                                    format: 'image/png',
-                                    transparent: 'true'
-                                },
-                                {
-                                    singleTile:true
-                                }
-                            );
+                "GeoAdmin WMS IFDG",
+                "http://wms.geo.admin.ch",
+                {
+                    layers: 'ch.swisstopo.pixelkarte-pk25.metadata-kartenblatt',
+                    SLD: 'http://poulpe.heig-vd.ch/ogo13' + '/blattnummer.sld.xml',
+                    format: 'image/png',
+                    transparent: 'true'
+                },
+                {
+                    singleTile:true
+                }
+            );
                 map.addLayer(wms);
 
                 map.addControl(new OpenLayers.Control.LayerSwitcher());
@@ -129,11 +128,11 @@
                 width: 100%;
                 height: 100%;
             }
-            
+
             .olControlAttribution {
                 visibility: hidden;
             }
-            
+
             .olLayerGoogleCopyright {
                 visibility: hidden;
             }
@@ -142,60 +141,11 @@
     </head>
 
     <body>
-        <div id="map" class="leaflet-container" style="display: block; position: relative;" tabindex="0">
-            <div class="leaflet-control-container">
-                <div class="leaflet-top leaflet-left">
-                    <div class="box-wrapper gui-control-wrapper leaflet-control" style="top: 5px; left: 420px; visibility: visible;">
-                        <a class="box-content gui-control gui-zoom-in" title="Zoom in"></a>
-                        <a class="box-content gui-control gui-zoom-out" title="Zoom out"></a>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div id="gui" style="display: block;">
-            <div id="main-wrapper" class="box-wrapper" style="left: 5px; visibility: visible;">
-                <div id="main-input" class="box-content">   
-                    <div id="input-mask">
-                        <div class="full">
-                            <div id="input-source" class="input-marker">
-                                <div class="left">
-                                    <span id="gui-search-source-label" class="input-label">Lieu de départ:</span>
-                                </div>
-                                <div class="center input-box">
-                                    <input id="gui-input-source" class="input-box" type="text" title="Lieu de départ" value="" maxlength="200">
-                                </div>
-                                <div class="left">
-                                    <div id="gui-delete-source" class="iconic-button cancel-marker input-delete"></div>
-                                </div>
-                            </div>
-                            <div id="input-target" class="input-marker">
-                                <div class="left">
-                                    <span id="gui-search-target-label" class="input-label">Lieu d'arrivée:</span>
-                                </div>
-                                <div class="center input-box">
-                                    <input id="gui-input-target" class="input-box" type="text" title="Lieu d'arrivée" value="" maxlength="200">
-                                </div>
-                                <div class="left">
-                                    <div id="gui-delete-target" class="iconic-button cancel-marker input-delete"></div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="quad"></div>
-                        <div class="full">
-                            <div class="row">
-                                <div class="left">
-                                    <a id="gui-reset" class="button">Reset</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div id="main-output" class="box-content">
-                    <div id="information-box-header"></div>
-                    <div id="information-box" class="information-box-with-normal-header"></div>
-                    
-                </div>
-            </div>
+        <div id="map"></div>
+        <div id="inputform">
+            <input id="start" name="start" type="text" placeholder="Lieu de départ" required autofocus>
+            <input id="end" name="end" type="text" placeholder="Lieu d'arrivée" required>
+            <input id="buton" type="submit"></button>
         </div>
     </body>
 

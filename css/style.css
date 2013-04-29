@@ -1,0 +1,55 @@
+
+#map {
+    width: 100%;
+    height: 100%;
+    position:relative;
+}
+
+#inputform {
+    padding: 10px;
+    position:absolute;
+    background-color: white;
+    top:90px;
+    left: 40px;
+    width:300px;
+    z-index:1;
+    margin-top:0;
+    background-image: linear-gradient(white , whitesmoke);
+    font: 14px normal normal uppercase helvetica, arial, serif;
+    color: #7c7873;
+    border-radius: 5px;
+    box-shadow:  inset 0px 0px 1px #b3a895;
+    text-shadow: 0px 1px 0px #fff;
+}
+
+input:first-child
+{ 
+margin-top: 0px;
+}
+input
+{
+    display: inline;
+    margin-top: 10px;
+}
+
+input[type=text]{
+    padding: 2px;
+    border-radius: 2px;
+    width: 100%;
+}
+
+#buton {
+    position:relative;
+/*    font-family: 'YanoneKaffeesatzRegular'; */
+    font-size:18px; 
+    color: #7c7873;
+    text-shadow:0 1px 0 #fff;
+    width:100%; 
+    text-align:center;
+    opacity:1;
+/*    background:none;*/
+    cursor: pointer;
+    border-radius: 3px;
+}
+
+
