@@ -17,7 +17,7 @@
             };
         </script>
         <script type="text/javascript">
-            var map,extent;
+            var map,extent,distance,monthlyDistance;
               
             $(document).ready(function(){
 
@@ -27,9 +27,78 @@
                     displayProjection: 'EPSG:4326' // Affichage en °
                 };          
                 map = new OpenLayers.Map('map', options);
-                
+
+                // définition de la couche de fond: OpenStreetMap
                 var osm = new OpenLayers.Layer.OSM();
                 map.addLayer(osm);
+
+                // définition du style des points départ/arrivée (étape 1)
+                var trackStyle = new OpenLayers.StyleMap({
+                    "default":new OpenLayers.Style({
+                        externalGraphic: "${getIcon}",
+                        strokeColor: "#FF0000",
+                        graphicHeight: 40,
+                        graphicYOffset: -43
+                    }, {
+                        context: {
+                            getIcon: function(feature) {
+                                var img = (feature.attributes.type == 'start') ? 'dot_1.png' : 'dot_2.png';
+                                var path = 'assets/img/';
+                                return path + img;
+                            }
+                        }
+                    })
+                });
+                
+                // définition du style des points départ/arrivée (après calcul)
+                var longTrackStyle = new OpenLayers.StyleMap({
+                    "default":new OpenLayers.Style({
+                        externalGraphic: "${getIcon}",
+                        strokeColor: "#0000FF",
+                        graphicHeight: 40,
+                        graphicYOffset: -43
+                    }, {
+                        context: {
+                            getIcon: function(feature) {
+                                var img = (feature.attributes.type == 'start') ? 'dot_1.png' : 'dot_2.png';
+                                var path = 'assets/img/';
+                                return path + img;
+                            }
+                        }
+                    })
+                });
+                
+                // définition du style des points départs/arrivées (après calcul, 
+                // personnalisé par l'utilisateur)
+                var persoLongTrackStyle = new OpenLayers.StyleMap({
+                    "default":new OpenLayers.Style({
+                        externalGraphic: "${getIcon}",
+                        strokeColor: "#00FFFF",
+                        graphicHeight: 40,
+                        graphicYOffset: -43
+                    }, {
+                        context: {
+                            getIcon: function(feature) {
+                                var img = (feature.attributes.type == 'start') ? 'dot_1.png' : 'dot_2.png';
+                                var path = 'assets/img/';
+                                return path + img;
+                            }
+                        }
+                    })
+                });
+
+                // création des deux couches de saisie des points départ/arrivée (étape 1)
+                startPointTrackLayer = new OpenLayers.Layer.Vector("Start Point Track Layer", {
+                    styleMap: trackStyle
+                });
+                endPointTrackLayer = new OpenLayers.Layer.Vector("End Point Track Layer", {
+                    styleMap: trackStyle
+                });
+                
+                // création de la couche isochrone
+                startPointLongTrackLayer = new OpenLayers.Layer.Vector("Start Point Long Track Layer", {
+                    styleMap: longTrackStyle
+                })
                          
                 var wms = new OpenLayers.Layer.WMS(
                                 "GeoAdmin WMS IFDG",
@@ -115,10 +184,7 @@
                         <div class="full">
                             <div class="row">
                                 <div class="left">
-                                    <a id="gui-reset" class="button">  Reset  </a>
-                                </div>
-                                <div class="right">
-                                    <a id="gui-reverse" class="button">Reverse</a>
+                                    <a id="gui-reset" class="button">Reset</a>
                                 </div>
                             </div>
                         </div>
