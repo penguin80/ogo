@@ -12,7 +12,7 @@ html, body {
 }
 .via-counter {
     background-color: #FFFFFF;
-    border-radius: 5px 5px 5px 5px;
+/*    border-radius: 5px 5px 5px 5px;*/
     display: none;
     font-size: 9px;
     position: absolute;
@@ -38,7 +38,7 @@ html, body {
 }
 .box-wrapper {
     background-color: rgba(0, 0, 0, 0.25);
-    border-radius: 10px 10px 10px 10px;
+/*    border-radius: 10px 10px 10px 10px;*/
     position: absolute;
 }
 .box-animated {
@@ -46,32 +46,32 @@ html, body {
 }
 .box-content {
     background-color: #FFFFFF;
-    border-radius: 8px 8px 8px 8px;
+    /*border-radius: 8px 8px 8px 8px;*/
     margin: 5px;
     padding: 5px;
     position: absolute;
 }
 .box-handle-wrapper-right {
-    border-bottom-right-radius: 0;
-    border-top-right-radius: 0;
+    /*border-bottom-right-radius: 0;*/
+    /*border-top-right-radius: 0;*/
     height: 36px;
     width: 36px;
 }
 .box-handle-content-right {
-    border-bottom-right-radius: 0;
-    border-top-right-radius: 0;
+    /*border-bottom-right-radius: 0;*/
+    /*border-top-right-radius: 0;*/
     height: 16px;
     width: 16px;
 }
 .box-handle-wrapper-left {
-    border-bottom-left-radius: 0;
-    border-top-left-radius: 0;
+    /*border-bottom-left-radius: 0;*/
+    /*border-top-left-radius: 0;*/
     height: 36px;
     width: 36px;
 }
 .box-handle-content-left {
-    border-bottom-left-radius: 0;
-    border-top-left-radius: 0;
+    /*border-bottom-left-radius: 0;*/
+    /*border-top-left-radius: 0;*/
     height: 16px;
     width: 16px;
 }
@@ -429,7 +429,7 @@ html, body {
 .button {
     background-color: #EEEEEE;
     border: 1px solid #999999;
-    border-radius: 5px 5px 5px 5px;
+    /*border-radius: 5px 5px 5px 5px;*/
     color: #333333;
     cursor: pointer;
     font-size: 9px;
@@ -449,7 +449,7 @@ html, body {
 .button-inactive {
     background-color: #F9F9F9;
     border: 1px solid #CCCCCC;
-    border-radius: 5px 5px 5px 5px;
+    /*border-radius: 5px 5px 5px 5px;*/
     color: #999999;
     cursor: default;
     font-size: 9px;
@@ -461,7 +461,7 @@ html, body {
 .button-pressed {
     background-color: #AAAAAA;
     border: 1px solid #999999;
-    border-radius: 5px 5px 5px 5px;
+    /*border-radius: 5px 5px 5px 5px;*/
     color: #000000;
     cursor: pointer;
     font-size: 9px;
@@ -638,7 +638,7 @@ html, body {
     background-image: url("images/down_active.png");
 }
 #input-mask-header {
-    background-image: url("../images/osrm-logo.png");
+/*    background-image: url("../images/osrm-logo.png");*/
 }
 .styled-select {
     background-image: url("images/selector.png");
