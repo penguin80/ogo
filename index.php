@@ -145,7 +145,7 @@
         <div id="inputform">
             <input id="start" name="start" type="text" placeholder="Lieu de départ" required autofocus>
             <input id="end" name="end" type="text" placeholder="Lieu d'arrivée" required>
-            <input id="buton" type="submit"></button>
+            <input id="buton" type="submit" value="Valider"/>
         </div>
     </body>
 
