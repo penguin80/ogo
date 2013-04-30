@@ -17,7 +17,7 @@ function initialize() {
     if (navigator.geolocation) {
         navigator.geolocation.getCurrentPosition(function(position) {
             var pos = new google.maps.LatLng(position.coords.latitude,
-                    position.coords.longitude);
+                position.coords.longitude);
 
             var infowindow = new google.maps.InfoWindow({
                 map: map,
@@ -53,19 +53,20 @@ function handleNoGeolocation(errorFlag) {
 }
 
 function calcRoute() {
-  var start = document.getElementById('start').value;
-  var end = document.getElementById('end').value;
-  var request = {
-    origin:start,
-    destination:end,
-    travelMode: google.maps.TravelMode.DRIVING,
-    unitSystem: UnitSystem.METRIC
-  };
-  directionsService.route(request, function(result, status) {
-    if (status == google.maps.DirectionsStatus.OK) {
-      directionsDisplay.setDirections(result);
-    }
-  });
+    
+    var start = document.getElementById('start').value;
+    var end = document.getElementById('end').value;
+    var request = {
+        origin:start,
+        destination:end,
+        travelMode: google.maps.TravelMode.DRIVING,
+        unitSystem: UnitSystem.METRIC
+    };
+    directionsService.route(request, function(result, status) {
+        if (status == google.maps.DirectionsStatus.OK) {
+            directionsDisplay.setDirections(result);
+        }
+    });
 }
 
 google.maps.event.addDomListener(window, 'load', initialize);

@@ -3,9 +3,11 @@
         <title>Lol</title>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <link type="text/css" href="css/style.css" rel="stylesheet">
+        <link rel="stylesheet" href="http://code.jquery.com/ui/1.10.2/themes/smoothness/jquery-ui.css" />
         <script type="text/javascript" src="js/OSRM.js"></script>    
         <script type="text/javascript" src="js/leaflet.js"></script>    
         <script type="text/javascript" src="js/config.js"></script> 
+        <script src="http://code.jquery.com/ui/1.10.2/jquery-ui.js"></script>
         <script id="jsonp_data_timestamp" type="text/javascript" src="http://router.project-osrm.org/timestamp?jsonp=OSRM.JSONP.callbacks.data_timestamp">
             OSRM.JSONP.callbacks.data_timestamp({"version": 0.3, "status": 0, "timestamp": "130426 07:29Z", "transactionId": "OSRM Routing Engine JSON timestamp (v0.3)"})
         </script>
@@ -17,7 +19,7 @@
         </script>
         <script type="text/javascript">
             $(document).ready(function(){
-                 
+                // $("#inputform").draggable();
                 var myLatLng = new google.maps.LatLng(0, -180);
                 var mapOptions = {
                     zoom: 3,
@@ -72,7 +74,13 @@
 
                     flightPath.setMap(map);
                 } 
+                
+               
             
+            });
+            
+            $(function() {
+                $( "#inputform" ).draggable();
             });
             
             
@@ -100,7 +108,7 @@
 
     <body>
         <div id="map"></div>
-        <div id="inputform">
+        <div id="inputform" class="ui-widget-content">
             <input id="start" name="start" type="text" placeholder="Lieu de départ" required autofocus>
             <input id="end" name="end" type="text" placeholder="Lieu d'arrivée" required>
             <input id="buton" type="submit" /> 
