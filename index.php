@@ -16,42 +16,69 @@
             };
         </script>
         <script type="text/javascript">
-            var map,extent;
-              
             $(document).ready(function(){
+                 
+                var myLatLng = new google.maps.LatLng(0, -180);
+                var mapOptions = {
+                    zoom: 3,
+                    center: myLatLng,
+                    mapTypeId: google.maps.MapTypeId.TERRAIN
+                };
 
-                var options = {
-                    projection: new OpenLayers.Projection("EPSG:900913"),
-                    maxExtent: new OpenLayers.Bounds(-20037508, -20037508, 20037508, 20037508),
-                    displayProjection: 'EPSG:4326' // Affichage en °
-                };          
-                map = new OpenLayers.Map('map', options);
+                var map = new google.maps.Map(document.getElementById("map"),
+                mapOptions);
                 
-                var osm = new OpenLayers.Layer.OSM();
-                map.addLayer(osm);
-                         
-                var wms = new OpenLayers.Layer.WMS(
-                "GeoAdmin WMS IFDG",
-                "http://wms.geo.admin.ch",
-                {
-                    layers: 'ch.swisstopo.pixelkarte-pk25.metadata-kartenblatt',
-                    SLD: 'http://poulpe.heig-vd.ch/ogo13' + '/blattnummer.sld.xml',
-                    format: 'image/png',
-                    transparent: 'true'
-                },
-                {
-                    singleTile:true
-                }
-            );
-                map.addLayer(wms);
+               
+                $("#buton").click(drawLine);
+                
+                function drawLine(){
+                
+                    var start = $('input[id=start]').val();
+                    var end = $('input[id=end]').val();
+                
+                    //alert(""+start);
+                    //var temp = $.getJSON("http://maps.googleapis.com/maps/api/directions/json?origin="+start+"&destination="+end+"&sensor=false");
+                    (function() {
+                        var googleAPI = "http://maps.googleapis.com/maps/api/directions/json?";
+                        $.getJSON( googleAPI, {
+                            origin: start,
+                            destination: end,
+                            sensor: "false"
+                        })
+                        .done(function( data ) {
+                            $.each( data.items, function( i, item ) {
+                                //Todo
+                                alert(""+item.start_location.lat);
+                                
+      
+                            });
+                        });
+                    })();
+                    
+                
+                    
+                    var trace = [
+                        new google.maps.LatLng(37.772323, -122.214897),
+                        new google.maps.LatLng(21.291982, -157.821856),
+                        new google.maps.LatLng(-18.142599, 178.431),
+                        new google.maps.LatLng(-27.46758, 153.027892)
+                    ];
+                    var flightPath = new google.maps.Polyline({
+                        path: trace,
+                        strokeColor: "#FF0000",
+                        strokeOpacity: 1.0,
+                        strokeWeight: 2
+                    });
 
-                map.addControl(new OpenLayers.Control.LayerSwitcher());
-                map.setCenter(new OpenLayers.LonLat(8, 47).transform(map.displayProjection, map.getProjectionObject()),6);
-                
-                $('#scale').click(function(){
-                    console.log(map.getScale());
-                })
+                    flightPath.setMap(map);
+                } 
+            
             });
+            
+            
+            
+            
+         
         </script>
 
         <style type="text/css">
@@ -76,7 +103,7 @@
         <div id="inputform">
             <input id="start" name="start" type="text" placeholder="Lieu de départ" required autofocus>
             <input id="end" name="end" type="text" placeholder="Lieu d'arrivée" required>
-            <input id="buton" type="submit"></button>
+            <input id="buton" type="submit" /> 
         </div>
     </body>
 
