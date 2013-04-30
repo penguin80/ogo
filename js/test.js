@@ -35,10 +35,12 @@ function initialize() {
 }
 
 function handleNoGeolocation(errorFlag) {
+
+    var content;
     if (errorFlag) {
-        var content = 'Error: The Geolocation service failed.';
+        content = 'Error: The Geolocation service failed.';
     } else {
-        var content = 'Error: Your browser doesn\'t support geolocation.';
+        content = 'Error: Your browser doesn\'t support geolocation.';
     }
 
     // Localisation basée sur la Suisse
@@ -48,7 +50,7 @@ function handleNoGeolocation(errorFlag) {
         content: content
     };
 
-    var infowindow = new google.maps.InfoWindow(options);
+    new google.maps.InfoWindow(options);
     map.setCenter(options.position);
 }
 
@@ -56,16 +58,23 @@ function calcRoute() {
 
     // Retrieve the start and end locations and create
     // a DirectionsRequest using DRIVING directions.
-    startPoint = document.getElementById('start').value;
+    var start = document.getElementById('start').value;
     var end = document.getElementById('end').value;
-    var request = {
-        origin: startPoint,
-        destination: end,
-//        avoidHighways: false,
-//        avoidTolls: true,
-        travelMode: google.maps.TravelMode.DRIVING,
-        unitSystem: google.maps.UnitSystem.METRIC
-    };
+    if (start !== null) {
+        if (end !== null)
+            var request = {
+                origin: start,
+                destination: end,
+//                avoidHighways: false,
+//                avoidTolls: true,
+                travelMode: google.maps.TravelMode.DRIVING,
+                unitSystem: google.maps.UnitSystem.METRIC
+            };
+        else
+            // Convertir le lieu de départ en coordonnées latitude/longitude
+            startPoint = new google.maps.LatLng(start.coords.latitude,
+                                            start.coords.longitude);
+    }
     
     // Route the directions and pass the response to a
     // function to create markers for each step.
@@ -86,9 +95,18 @@ function calcRoute() {
 
 function newRoute() {
     
-    var options = {
-        
-    };
+    if (startPoint !== null)
+        var options = {
+            center: startPoint,
+            map: map,
+            radius: distance*2*20,
+            visible: true,
+            fillColor: 'lilas',
+            fillOpacity: 0.9
+        };
+    
+    new google.maps.Circle(options);
+    map.setCenter(options.center);
 }
 
 google.maps.event.addDomListener(window, 'load', initialize);
