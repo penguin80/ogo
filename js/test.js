@@ -1,29 +1,28 @@
 var directionsDisplay;
 var directionsService = new google.maps.DirectionsService();
 var map;
-
+var trackWindowInfo;
+var startPoint;
+var distance;
 
 function initialize() {
+
+    // Instantiate a directions service.
     directionsDisplay = new google.maps.DirectionsRenderer();
+
+    // Create a map and center it on geolocalisation (if it works).
     var mapOptions = {
         zoom: 6,
         mapTypeId: google.maps.MapTypeId.ROADMAP
     };
     map = new google.maps.Map(document.getElementById('map'), mapOptions);
     directionsDisplay.setMap(map);
-    directionsDisplay.setPanel(document.getElementById("directionsPanel"));
 
     // Try HTML5 geolocation
     if (navigator.geolocation) {
         navigator.geolocation.getCurrentPosition(function(position) {
             var pos = new google.maps.LatLng(position.coords.latitude,
                 position.coords.longitude);
-
-            var infowindow = new google.maps.InfoWindow({
-                map: map,
-                position: pos,
-                content: 'Location found using HTML5.'
-            });
 
             map.setCenter(pos);
         }, function() {
@@ -42,9 +41,10 @@ function handleNoGeolocation(errorFlag) {
         var content = 'Error: Your browser doesn\'t support geolocation.';
     }
 
+    // Localisation basée sur la Suisse
     var options = {
         map: map,
-        position: new google.maps.LatLng(60, 105),
+        position: new google.maps.LatLng(47, 7),
         content: content
     };
 
@@ -53,20 +53,50 @@ function handleNoGeolocation(errorFlag) {
 }
 
 function calcRoute() {
-    
-    var start = document.getElementById('start').value;
+
+    // Retrieve the start and end locations and create
+    // a DirectionsRequest using DRIVING directions.
+    startPoint = document.getElementById('start').value;
     var end = document.getElementById('end').value;
     var request = {
-        origin:start,
-        destination:end,
+        origin: startPoint,
+        destination: end,
+        //        avoidHighways: false,
+        //        avoidTolls: true,
         travelMode: google.maps.TravelMode.DRIVING,
-        unitSystem: UnitSystem.METRIC
+        unitSystem: google.maps.UnitSystem.METRIC
     };
-    directionsService.route(request, function(result, status) {
+    
+    // Route the directions and pass the response to a
+    // function to create markers for each step.
+    directionsService.route(request, function(response, status) {
         if (status == google.maps.DirectionsStatus.OK) {
-            directionsDisplay.setDirections(result);
+            directionsDisplay.setDirections(response);
+            var route = response.routes[0];
+            distance = route.legs[0].distance.value;
+            trackWindowInfo = new google.maps.InfoWindow({
+                map: map,
+                position: route.legs[0].start_location,
+                content: 'Distance du trajet simple: <br />' + route.legs[0].distance.text +
+                '<br /><button class="longTrack" onclick="newRoute()">Générer tracer</button>'
+            });
         }
     });
 }
+
+function newRoute() {
+    
+    var options = {
+        center: startPoint,
+        map: map,
+        radius: distance*2*20,
+        visible: false
+        
+    };
+}
+
+$(function() {
+    $( "#inputform" ).draggable();
+});
 
 google.maps.event.addDomListener(window, 'load', initialize);
