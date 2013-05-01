@@ -5,6 +5,13 @@ var trackWindowInfo;
 var startPoint;
 var distance;
 
+$(document).ready(function() {
+    
+    initialize();
+    $("#search").click(calcRoute);
+    
+});
+
 function initialize() {
 
     // Instantiate a directions service.
@@ -80,7 +87,7 @@ function calcRoute() {
     // function to create markers for each step.
     directionsService.route(request, function(response, status) {
         if (status == google.maps.DirectionsStatus.OK) {
-            //directionsDisplay.setDirections(response);
+            directionsDisplay.setDirections(response);
             var route = response.routes[0];
             distance = route.legs[0].distance.value;
             trackWindowInfo = new google.maps.InfoWindow({

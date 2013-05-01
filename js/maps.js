@@ -142,7 +142,7 @@ $(document).ready(function() {
 
 });
 
-function displayTrack() {
+function displayDailyTrack() {
 
     // Retrieve the start and end locations and create
     // a DirectionsRequest using DRIVING directions.
@@ -163,6 +163,8 @@ function displayTrack() {
             startPoint = new google.maps.LatLng(start.coords.latitude,
                     start.coords.longitude);
     }
+    
+    
 
     // Route the directions and pass the response to a
     // function to create markers for each step.
@@ -171,8 +173,9 @@ function displayTrack() {
             directionsDisplay.setDirections(response);
             var route = response.routes[0];
             distance = route.legs[0].distance.value;
+            alert(distance);
             trackWindowInfo = new google.maps.InfoWindow({
-                map: trackMap,
+                map: map,
                 position: route.legs[0].start_location,
                 content: 'Distance du trajet simple: <br />' + route.legs[0].distance.text +
                         '<br /><button class="longTrack" onclick="newRoute()">Générer tracer</button>'
