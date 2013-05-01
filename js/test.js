@@ -1,36 +1,9 @@
 var directionsDisplay;
 var directionsService = new google.maps.DirectionsService();
-var map, trackMap;
+var trackMap;
 var trackWindowInfo;
 var startPoint;
 var distance;
-
-$(document).ready(function() {
-    var options = {
-        controls: [],
-        projection: new OpenLayers.Projection("EPSG:900913"),
-        maxExtent: new OpenLayers.Bounds(-20037508, -20037508, 20037508, 20037508),
-        displayProjection: new OpenLayers.Projection("EPSG:4326"),
-        units: 'm',
-        allOverlays: true
-    };
-
-    map = new OpenLayers.Map('map', options);
-    map.addControl(new OpenLayers.Control.Navigation());
-
-    var osm = new OpenLayers.Layer.OSM("OpenStreetMap", {
-        isBaseLayer: true
-    });
-    map.addLayer(osm);
-    
-    var gSat = new OpenLayers.Layer.Google("Google Satellite", {
-        type: google.maps.MapTypeId.SATELLITE,
-        sphericalMercator: true,
-        isBaseLayer: true
-    });
-    map.addLayer(gSat);
-
-})
 
 function initialize() {
 
@@ -52,7 +25,6 @@ function initialize() {
                     position.coords.longitude);
 
             trackMap.setCenter(pos);
-            map.setCenter(pos);
         }, function() {
             handleNoGeolocation(true);
         });
