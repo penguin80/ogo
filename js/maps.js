@@ -107,7 +107,7 @@ $(document).ready(function() {
     );
     map.addLayer(gsat);
 
-    dailyTrack = new OpenLayers.Layer.WMS(
+    var dailyTrack = new OpenLayers.Layer.WMS(
             "Your daily track",
             myWMS,
             {
@@ -160,12 +160,10 @@ function displayDailyTrack() {
             };
         else
             // Convertir le lieu de départ en coordonnées latitude/longitude
-            startPoint = new google.maps.LatLng(start.coords.latitude,
-                    start.coords.longitude);
+            startPoint = new google.maps.LatLng(start.coords.latitude, 
+                                                start.coords.longitude);
     }
     
-    
-
     // Route the directions and pass the response to a
     // function to create markers for each step.
     directionsService.route(request, function(response, status) {
@@ -173,7 +171,6 @@ function displayDailyTrack() {
             directionsDisplay.setDirections(response);
             var route = response.routes[0];
             distance = route.legs[0].distance.value;
-            alert(distance);
             trackWindowInfo = new google.maps.InfoWindow({
                 map: map,
                 position: route.legs[0].start_location,
@@ -183,7 +180,6 @@ function displayDailyTrack() {
         }
     });
 }
-
 
 $(function() {
     $("#inputform").draggable();
