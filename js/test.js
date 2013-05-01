@@ -83,7 +83,9 @@ function calcRoute() {
                     start.coords.longitude);
     }
 
-    // Route the directions and pass the response to a
+   
+   //
+   // Route the directions and pass the response to a
     // function to create markers for each step.
     directionsService.route(request, function(response, status) {
         if (status == google.maps.DirectionsStatus.OK) {

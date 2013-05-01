@@ -95,7 +95,11 @@ function calcRoute() {
             distance = route.legs[0].distance.value;
             
         }
+         $("#inputform").append("<div>"+distance/1000+" km</div>");
+         $("#inputform").append("<button id='longTrack'>Générer tracer</button>");
     });
+    
+    
 }
 
 function newRoute() {
