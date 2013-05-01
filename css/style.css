@@ -53,4 +53,29 @@ input[type=text]{
     border-radius: 3px;
 }
 
+.olControlLayerSwitcher {
+    color: #555;
+}
+  
+.olControlLayerSwitcher .layersDiv {
+    background-color: white;
+}
 
+.olControlScale {
+    background-color: white;
+}
+
+.olControlScaleLine {
+    background-color: white;
+    bottom:50px;
+}
+
+.olControlPanel div { 
+    position: absolute;
+    width:  37px;
+    height: 37px;
+    margin: 5px;
+    top: 5px;
+    background-position: center;
+    background-repeat: no-repeat;
+}
