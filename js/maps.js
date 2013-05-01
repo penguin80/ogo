@@ -32,7 +32,7 @@ function initialize() {
     if (navigator.geolocation) {
         navigator.geolocation.getCurrentPosition(function(position) {
             var pos = new google.maps.LatLng(position.coords.latitude,
-                    position.coords.longitude);
+                position.coords.longitude);
 
             trackMap.setCenter(pos);
         }, function() {
@@ -68,38 +68,48 @@ function calcRoute() {
 
     // Retrieve the start and end locations and create
     // a DirectionsRequest using DRIVING directions.
-    var start = document.getElementById('start').value;
-    var end = document.getElementById('end').value;
+    var start = $("#start").val()
+    var end = $("#end").val();
     if (start !== null) {
-        if (end !== null)
+        if (end !== null) {
             var request = {
                 origin: start,
                 destination: end,
-//                avoidHighways: false,
-//                avoidTolls: true,
+                //                avoidHighways: false,
+                //                avoidTolls: true,
                 travelMode: google.maps.TravelMode.DRIVING,
                 unitSystem: google.maps.UnitSystem.METRIC
             };
-        else
-            // Convertir le lieu de départ en coordonnées latitude/longitude
-            startPoint = new google.maps.LatLng(start.coords.latitude,
-                    start.coords.longitude);
-    }
+                                                
+            displayRoute(request);
+        } else
+            alert("You have to define a destination");
+    } else
+        alert("You have to define a start");
+}
 
+function displayRoute(request) {
     // Route the directions and pass the response to a
     // function to create markers for each step.
     directionsService.route(request, function(response, status) {
         if (status == google.maps.DirectionsStatus.OK) {
             directionsDisplay.setDirections(response);
+            console.log(response);
             var route = response.routes[0];
+            
+            // Sauvegarder la valeur de la distance reçue
             distance = route.legs[0].distance.value;
             
+            // Convertir le lieu de départ en coordonnées latitude/longitude
+            startPoint = new google.maps.LatLng(route.legs[0].start_location.lat,
+                route.legs[0].start_location.lng);
+                                                
+            // Apporter des informations supplémentaires au formulaire
+            $("#result").html("Longueur du parrcours quotidien: " + route.legs[0].distance.text);
+            var button = $("<button/>").attr("id", "generateLongTrack").attr("type", "button");
+            button.appendTo($("#result"));
         }
-         $("#inputform").append("<div>"+distance/1000+" km</div>");
-         $("#inputform").append("<button id='longTrack'>Générer tracer</button>");
     });
-    
-    
 }
 
 function newRoute() {
