@@ -4,9 +4,10 @@ var trackMap;
 var trackWindowInfo;
 var startPoint;
 var distance;
+ var lineLayer = new OpenLayers.Layer.Vector("Line Layer"); 
 
 $(document).ready(function() {
-    
+    $("#inputform").draggable();
     initialize();
     $("#search").click(calcRoute);
     $("#generateLongTrack").live("click", function() {
@@ -93,9 +94,13 @@ function displayRoute(request) {
     // function to create markers for each step.
     directionsService.route(request, function(response, status) {
         if (status == google.maps.DirectionsStatus.OK) {
-            directionsDisplay.setDirections(response);
-            console.log(response);
+            //directionsDisplay.setDirections(response);
+            
             var route = response.routes[0];
+            var pointsArray = response.routes[0].overview_path;
+            
+//            console.log(pointsArray[2].hb);
+//            console.log(pointsArray[2].ib);
             
             // Sauvegarder la valeur de la distance reçue
             distance = route.legs[0].distance.value;
@@ -107,17 +112,37 @@ function displayRoute(request) {
             // Apporter des informations supplémentaires au formulaire
             $("#result").html("Longueur du parrcours quotidien: " + route.legs[0].distance.text);
             var button = $("<button/>").attr("id", "generateLongTrack").attr("type", "button");
-            button.appendTo($("#result"));
+            //button.appendTo($("#result"));
+            $("#inputform").append("Longueur du parrcours quotidien: " + route.legs[0].distance.text);
+            newRoute(pointsArray);
         }
+        
+        
     });
 }
 
-function newRoute() {
-    alert("toto");
-}
+function newRoute(pointsArray) {
+   
 
-$(function() {
-    $("#inputform").draggable();
-});
+    trackMap.addLayer(lineLayer);                    
+    //trackMap.addControl(new OpenLayers.Control.DrawFeature(lineLayer, OpenLayers.Handler.Path));                                     
+    var points = new Array();
+    var j = 0;
+    for(j=0; pointsArray.length(); j++){
+        points[j] = new OpenLayers.Geometry.Point(pointsArray[j].hb, pointsArray[2].ib)
+    }
+
+    console.log(points);
+    var line = new OpenLayers.Geometry.LineString(points);
+
+    var style = { 
+        strokeColor: '#0000ff', 
+        strokeOpacity: 0.5,
+        strokeWidth: 5
+    };
+
+    var lineFeature = new OpenLayers.Feature.Vector(line, null, style);
+    lineLayer.addFeatures([lineFeature]);
+}
 
 google.maps.event.addDomListener(window, 'load', initialize);
