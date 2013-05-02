@@ -228,11 +228,10 @@ function displayRoute(request) {
 
         if (status == google.maps.DirectionsStatus.OK) {
             //directionsDisplay.setDirections(result);
-            alert("lol");
             var route = result.routes[0];
             //alert("lol");
 
-            // Récupérer un tracé OpenLayers de type Curve
+            // Récupérer un tracé OpenLayers de type LineString
             var ligne = extractPoints(result);
             
             // Définir le style du tracé à afficher
@@ -242,7 +241,10 @@ function displayRoute(request) {
             redLine.addRules([rule]);
 
             // Créer le Feature
-            track = new OpenLayers.Feature.Vector(ligne, "tracé", redLine);
+            track = new OpenLayers.Feature.Vector(ligne, {
+                distance: route.legs[0].distance.value,
+                units: "km"
+            });
             
             dailyTrack.removeAllFeatures();
             dailyTrack.addFeatures([track]);
@@ -278,7 +280,7 @@ function extractPoints(result) {
         console.log(result.routes[0].overview_path[i]);
         pointList.push(point);
     }
-    ligne = new OpenLayers.Geometry.Curve(pointList);
+    ligne = new OpenLayers.Geometry.LineString(pointList);
     return ligne.transform(new OpenLayers.Projection("EPSG:4326"), new OpenLayers.Projection("EPSG:900913"));
 }
 
