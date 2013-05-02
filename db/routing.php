@@ -1,5 +1,10 @@
 <?php
-include('./connection.php');
+include('connection.php');
+// definition du MIME-TYPE du contenu GeoJSON
+
+
+
+header('Content-Type: application/json');
 
 if ($conn !== false) {
 
@@ -44,4 +49,3 @@ if ($conn !== false) {
 }
 
 
-?>
