@@ -4,7 +4,7 @@ var trackMap;
 var trackWindowInfo;
 var startPoint;
 var distance;
- var lineLayer = new OpenLayers.Layer.Vector("Line Layer"); 
+//var lineLayer = new OpenLayers.Layer.Vector("Line Layer"); 
 
 $(document).ready(function() {
     $("#inputform").draggable();
@@ -81,7 +81,7 @@ function calcRoute() {
                 travelMode: google.maps.TravelMode.DRIVING,
                 unitSystem: google.maps.UnitSystem.METRIC
             };
-                                                
+                                       
             displayRoute(request);
         } else
             alert("You have to define a destination");
@@ -90,18 +90,20 @@ function calcRoute() {
 }
 
 function displayRoute(request) {
+    var lng, lat
     // Route the directions and pass the response to a
     // function to create markers for each step.
-    directionsService.route(request, function(response, status) {
+    directionsService.route(request, function(result, status) {
+        
         if (status == google.maps.DirectionsStatus.OK) {
-            //directionsDisplay.setDirections(response);
+            //directionsDisplay.setDirections(result);
+            //alert("lol");  
+            var route = result.routes[0];
+            //alert("lol");
             
-            var route = response.routes[0];
-            var pointsArray = response.routes[0].overview_path;
-            
-//            console.log(pointsArray[2].hb);
-//            console.log(pointsArray[2].ib);
-            
+            var ligne = extractPoints(result);
+           
+
             // Sauvegarder la valeur de la distance reçue
             distance = route.legs[0].distance.value;
             
@@ -114,35 +116,30 @@ function displayRoute(request) {
             var button = $("<button/>").attr("id", "generateLongTrack").attr("type", "button");
             //button.appendTo($("#result"));
             $("#inputform").append("Longueur du parrcours quotidien: " + route.legs[0].distance.text);
-            newRoute(pointsArray);
+        // newRoute(pointsArray);
         }
         
         
     });
 }
 
-function newRoute(pointsArray) {
-   
-
-    trackMap.addLayer(lineLayer);                    
-    //trackMap.addControl(new OpenLayers.Control.DrawFeature(lineLayer, OpenLayers.Handler.Path));                                     
-    var points = new Array();
-    var j = 0;
-    for(j=0; pointsArray.length(); j++){
-        points[j] = new OpenLayers.Geometry.Point(pointsArray[j].hb, pointsArray[2].ib)
+function extractPoints(result) {
+    var point;
+    var pointList = [];
+    var lng, lat
+    for (var i = 0; i < result.routes[0].overview_path.length-1; i++) {
+        lng = result.routes[0].overview_path[i].hb;
+        lat = result.routes[0].overview_path[i].ib;
+        
+        
+        
+        point = new OpenLayers.Geometry.Point(lng, lat);
+       
+        pointList.push(point);
     }
-
-    console.log(points);
-    var line = new OpenLayers.Geometry.LineString(points);
-
-    var style = { 
-        strokeColor: '#0000ff', 
-        strokeOpacity: 0.5,
-        strokeWidth: 5
-    };
-
-    var lineFeature = new OpenLayers.Feature.Vector(line, null, style);
-    lineLayer.addFeatures([lineFeature]);
+    ligne = new OpenLayers.Geometry.Curve(pointList);
+     console.log(ligne);
+    return ligne;
 }
 
 google.maps.event.addDomListener(window, 'load', initialize);
